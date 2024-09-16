@@ -1,5 +1,6 @@
 ---
-
+// Server Only
+const name = 'William Mosquera'
 ---
 
 <html lang="en">
@@ -11,6 +12,19 @@
 		<title>Astro ~ WjmmK.</title>
 	</head>
 	<body>
-		<h1>Mí primera aplicacion Astro.</h1>
+		<h1>{name}.</h1>
+
+		<p>Momento actual: {new Date().toLocaleTimeString()}</p>
+		<p id="current-time">Momento actual real: {new Date().toLocaleTimeString()}</p>
+
+		<footer>Año: {new Date().getFullYear()}</footer>
+
+		<script>
+			const currentYear = new Date().getFullYear();
+			const footer = document.querySelector('footer') as HTMLElement;
+			const currentTimeParagraph = document.querySelector('#current-time') as HTMLParagraphElement;
+			currentTimeParagraph.innerText = `Momento actual real: ${new Date().toLocaleTimeString()}`;
+			footer.innerText = `Año: ${currentYear}`;
+		</script>
 	</body>
 </html>
