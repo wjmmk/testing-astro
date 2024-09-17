@@ -1,34 +1,29 @@
 ---
-import Navbar from "../components/Navbar.astro"
-
 // Server Only
-const name = 'William Mosquera'
+
+import PokemonCard from "../components/pokemons/PokemonCard.astro";
+import type { PokemonListResponse } from "../interfaces/poke-response";
+import MainLayout from "../layouts/MainLayout.astro";
+
+
+const title = 'Astro ~ WjmmK. | Home'
+
+const pokemoms = await fetch('https://pokeapi.co/api/v2/pokemon');
+if(!pokemoms) return null;
+const data = (await pokemoms.json()) as PokemonListResponse
+
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro ~ WjmmK.</title>
-	</head>
-	<body>
-	    <Navbar />
+<MainLayout name={title} />
+		<h1 class="text-3xl font-mono mt-5 text-center text-blue-500">!!! Listado de Pokemons ¡¡¡</h1>
+<hr>
+<section
+   aria-label="Listado de Pókemons"
+   class="grid grid-cols-1 sm:grid-col-4 md:grid-cols-5 gap-4"
+>
+	{data.results.map((pokemon) => ( 
+		<PokemonCard name={pokemon.name} url={pokemon.url} />
+	))}
+</section>
 
-		<h1>{name}.</h1>
-
-		<p>Momento actual: {new Date().toLocaleTimeString()}</p>
-		<p id="current-time">Momento actual real: {new Date().toLocaleTimeString()}</p>
-
-		<footer>Año: {new Date().getFullYear()}</footer>
-
-		<script>
-			const currentYear = new Date().getFullYear();
-			const footer = document.querySelector('footer') as HTMLElement;
-			const currentTimeParagraph = document.querySelector('#current-time') as HTMLParagraphElement;
-			currentTimeParagraph.innerText = `Momento actual real: ${new Date().toLocaleTimeString()}`;
-			footer.innerText = `Año: ${currentYear}`;
-		</script>
-	</body>
-</html>
+	
