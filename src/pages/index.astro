@@ -15,11 +15,11 @@ const data = (await pokemoms.json()) as PokemonListResponse
 ---
 
 <MainLayout name={title} />
-		<h1 class="text-3xl font-mono mt-5 text-center text-blue-500">!!! Listado de Pokemons ¡¡¡</h1>
+<h1 class="text-3xl font-mono mt-5 text-center text-blue-500 m-5">📜 Listado 〰 Pokemons 🧾</h1>
 <hr>
 <section
    aria-label="Listado de Pókemons"
-   class="grid grid-cols-1 sm:grid-col-4 md:grid-cols-5 gap-4"
+   class="grid grid-cols-1 sm:grid-col-4 md:grid-cols-5 mx-16 gap-4"
 >
 	{data.results.map((pokemon) => ( 
 		<PokemonCard name={pokemon.name} url={pokemon.url} />
